@@ -6,6 +6,13 @@ const nextConfig = {
   },
   transpilePackages: ["three"],
   output: "standalone",
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(gltf|bin|glb)$/,
+      type: "asset/resource",
+    });
+    return config;
+  },
 };
 
 module.exports = nextConfig;
