@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { type MeshProps } from "@react-three/fiber";
+import { useFrame, type MeshProps } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { Group } from "three";
 
@@ -15,6 +15,11 @@ export default function Wizard(props: MeshProps) {
   useEffect(() => {
     groupRef.current.rotation.x = -Math.PI / 2;
   }, []);
+
+  useFrame((state, delta) => {
+    // Y축 대신 Z축으로 회전
+    groupRef.current.rotation.z += delta;
+  });
 
   return (
     <group
