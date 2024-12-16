@@ -1,44 +1,28 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { useFrame, type MeshProps } from "@react-three/fiber";
+import { useRef, useEffect } from "react";
+import { useFrame, GroupProps } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { Group } from "three";
 
-export default function Wizard(props: MeshProps) {
-  const { nodes, materials } = useGLTF("/models/scene.gltf", "/models");
-  const groupRef = useRef<Group>(null!);
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
+export default function Wizard(props: GroupProps) {
+  const { scene } = useGLTF("/models/scene.gltf", "/models");
 
-  // 모델을 초기에 90도 회전 (X축 기준)
+  const groupRef = useRef<Group>(null!);
+
   useEffect(() => {
-    groupRef.current.rotation.x = -Math.PI / 2;
+    groupRef.current.rotation.x = 0.5;
   }, []);
 
   useFrame((state, delta) => {
-    // Y축 대신 Z축으로 회전
-    groupRef.current.rotation.z += delta;
+    groupRef.current.rotation.y += delta * 0.5;
   });
 
   return (
-    <group
-      ref={groupRef}
-      rotation={[-Math.PI / 2, 0, 0]}
-      scale={0.7} // 전체 크기를 줄임
-    >
-      <ambientLight intensity={0.5} />
+    <group ref={groupRef} scale={[2, 2, 2]} position={[0, 2, 0]} {...props}>
+      <ambientLight intensity={1} />
       <pointLight position={[10, 10, 10]} intensity={1} />
-      <mesh
-        // @ts-ignore
-        geometry={nodes.Cube002_0.geometry}
-        material={materials.color}
-        scale={active ? 1.5 : 1}
-        onClick={() => setActive(!active)}
-        onPointerOver={() => setHover(true)}
-        onPointerOut={() => setHover(false)}
-        {...props}
-      />
+      <primitive object={scene} />
     </group>
   );
 }
