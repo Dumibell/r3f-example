@@ -13,7 +13,7 @@
     "@react-three/drei": "9.92.7",
     "@react-three/fiber": "8.15.12",
     "add": "^2.0.6",
-    "next": "≈",
+    "next": "14.2.15",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwind-merge": "^2.5.5",
