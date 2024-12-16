@@ -1,7 +1,7 @@
 "use client";
 
-import Wizard from "@/components/Wizard";
-import MotionContainer from "@/components/MotionContainer";
+import Wizard from "@/components/Atoms/Wizard";
+import MotionContainer from "@/components/Molcules/MotionContainer";
 
 export default function Home() {
   return (
@@ -12,6 +12,8 @@ export default function Home() {
             className="h-[450px]"
             position={[0, -4, 0]}
             scale={[2, 2, 2]}
+            minDistance={12}
+            maxDistance={40}
           >
             <Wizard />
           </MotionContainer>

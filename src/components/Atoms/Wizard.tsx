@@ -1,9 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { useFrame, GroupProps } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Group } from "three";
+import { useGLTF } from "@react-three/drei";
 
 export default function Wizard() {
   const { scene } = useGLTF("/models/scene.gltf", "/models");
